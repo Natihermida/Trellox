@@ -1,0 +1,59 @@
+/* index.css */
+body {
+    background-color: #f4a1c4; /* Rosa medio */
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem; /* Aumentamos el tamaño para hacerlo más visible */
+    margin-bottom: 2rem;
+    color: white;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Espaciado entre los botones */
+}
+
+a.btn {
+    display: inline-block;
+    background-color: white;
+    color: #f4a1c4;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Suaviza los efectos de hover */
+}
+
+a.btn:hover {
+    background-color: #f4a1c4;
+    color: white;
+    transform: translateY(-5px); /* Hace que el botón "suba" un poco al pasar el ratón */
+}
+
+a.btn:active {
+    transform: translateY(0); /* El botón regresa a su posición original cuando se hace clic */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #d07b96; /* Color para el hover de los enlaces, si es necesario */
+}
+
+
