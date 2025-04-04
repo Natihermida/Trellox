@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+<h1>Bienvenido, <span th:text="${user}"></span></h1>
+
+<!-- Área de proyectos -->
+<div>
+    <h2>Gestión de Proyectos</h2>
+    <ul>
+        <li th:each="project : ${projects}">
+            <a th:href="@{/dashboard/detail_project/{id}(id=${project.id})}" th:text="${project.title}">Nombre del Proyecto</a>
+        </li>
+    </ul>
+    <button onclick="window.location.href='/dashboard/new_project'">Nuevo Proyecto</button>
+</div>
+
+<!-- Separador entre las secciones -->
+<hr>
+
+<!-- Área de colaboradores -->
+<div>
+    <h2>Colaboradores</h2>
+    <ul>
+        <li th:each="collaborator : ${collaborators}">
+            <span th:text="${collaborator.first_name} + ' ' + ${collaborator.last_name}"></span>
+        </li>
+    </ul>
+    <button onclick="window.location.href='/dashboard/invite_collaborator'">Invitar Colaborador</button>
+</div>
+
+</body>
+</html>
+
+

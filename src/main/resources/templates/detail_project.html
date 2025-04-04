@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Proyecto</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Vincula tu archivo de estilos -->
+</head>
+
+<body>
+<div class="container">
+    <header>
+        <h1>Detalles del Proyecto</h1>
+    </header>
+
+    <!-- Detalles del Proyecto -->
+    <section class="project-details">
+        <h2>{{ project.name }}</h2>
+        <p><strong>Descripción:</strong> {{ project.description }}</p>
+        <p><strong>Fecha de Inicio:</strong> {{ project.startDate }}</p>
+        <p><strong>Fecha de Fin:</strong> {{ project.endDate }}</p>
+        <p><strong>Estado:</strong> {{ project.status }}</p>
+    </section>
+
+    <!-- Formulario para crear nuevas tareas -->
+    <section class="new-task">
+        <h3>Crear Nueva Tarea</h3>
+        <form action="/dashboard/project/{{ project.id }}/task" method="POST">
+            <label for="taskName">Nombre de la Tarea</label>
+            <input type="text" id="taskName" name="taskName" required>
+
+            <label for="taskDescription">Descripción</label>
+            <textarea id="taskDescription" name="taskDescription" rows="4" required></textarea>
+
+            <label for="taskDueDate">Fecha de Vencimiento</label>
+            <input type="date" id="taskDueDate" name="taskDueDate" required>
+
+            <button type="submit">Crear Tarea</button>
+        </form>
+    </section>
+
+    <!-- Lista de Tareas del Proyecto -->
+    <section class="tasks-list">
+        <h3>Tareas del Proyecto</h3>
+        <ul>
+            <!-- Itera sobre las tareas y muéstralas -->
+            <li th:each="task : ${project.tasks}">
+                <h4>{{ task.name }}</h4>
+                <p><strong>Descripción:</strong> {{ task.description }}</p>
+                <p><strong>Fecha de Vencimiento:</strong> {{ task.dueDate }}</p>
+                <p><strong>Estado:</strong> {{ task.status }}</p>
+                <!-- Agregar más detalles o botones según sea necesario -->
+            </li>
+        </ul>
+    </section>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+/* Estilos generales */
+body {
+    background-color: #f4a1c4; /* Rosa medio */
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe toda la pantalla */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Eliminar cualquier scroll innecesario */
+}
+
+/* Contenedor principal del formulario */
+.login-container {
+    text-align: center;
+    background-color: white;
+    padding: 1rem; /* Reducido para hacerlo más compacto */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px; /* Tamaño más pequeño para el formulario */
+    box-sizing: border-box;
+    margin-top: 10px; /* Espacio superior reducido */
+    margin-bottom: 10px; /* Espacio inferior reducido */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reducir el espacio entre los campos */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reducir el espacio entre los campos */
+    align-items: center; /* Centra los campos */
+}
+
+/* Estilo de las etiquetas */
+label {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 2px; /* Reducir aún más el margen inferior */
+    color: #333;
+    width: 100%;
+    font-size: 0.9rem; /* Reducir tamaño de fuente de las etiquetas */
+}
+
+/* Estilo de los campos de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    padding: 6px; /* Reducido padding para campos más pequeños */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente en los campos */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+    border-color: #f4a1c4; /* Color de borde en focus */
+    outline: none;
+}
+
+/* Estilo del botón */
+button {
+    background-color: #f4a1c4;
+    color: white;
+    padding: 8px 16px; /* Reducido padding para botón más pequeño */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Hace que el botón ocupe todo el ancho */
+    font-size: 0.9rem; /* Reducir tamaño de fuente del botón */
+}
+
+button:hover {
+    background-color: #d07b96; /* Rosa más oscuro para hover */
+}
+
+/* Enlace */
+a {
+    color: #f4a1c4;
+    font-size: 0.9rem; /* Reducir tamaño de fuente del enlace */
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+a:hover {
+    color: #d07b96;
+}
+
+/* Contenedor de los botones */
+.form-buttons {
+    display: flex;
+    flex-direction: row; /* Alineación horizontal */
+    justify-content: space-between; /* Espacio entre los elementos */
+    width: 100%;
+    gap: 10px; /* Espacio entre los enlaces y el botón */
+}
+
+/* Enlace "Volver al inicio" */
+a.volver {
+    display: inline-block;
+    background-color: #f4a1c4;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none; /* Para eliminar el subrayado */
+    font-size: 1rem;
+    width: auto;
+}
+
+a.volver:hover {
+    background-color: #d07b96;
+}
+
+.form-links {
+    display: flex;
+    justify-content: space-between; /* Hace que los enlaces estén a la par */
+    gap: 10px; /* Espacio entre los enlaces */
+    width: 100%; /* Asegura que ocupen el 100% del ancho */
+    text-align: center; /* Centra el texto */
+    margin-top: 10px; /* Margen superior */
+}
+/* Media queries para adaptarse a pantallas más pequeñas */
+@media screen and (max-width: 480px) {
+    .login-container {
+        max-width: 280px; /* Hacer el formulario más pequeño en móviles */
+        padding: 0.75rem; /* Ajustar el padding */
+    }
+
+    label, input, button {
+        font-size: 0.85rem; /* Reducir el tamaño de la fuente en dispositivos pequeños */
+    }
+}
+
+/* Media queries para pantallas de tabletas */
+@media screen and (max-width: 768px) {
+    .login-container {
+        max-width: 350px; /* Un tamaño más grande para tabletas */
+        padding: 1rem;
+    }
+
+    label, input, button {
+        font-size: 0.9rem; /* Mantener el tamaño de fuente adecuado para tabletas */
+    }
+}

@@ -1,0 +1,154 @@
+/* Estilos generales */
+body {
+    background-color: #f4a1c4; /* Rosa medio */
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe toda la pantalla */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Eliminar cualquier scroll innecesario */
+}
+
+/* Contenedor principal del formulario */
+.register-container {
+    text-align: center;
+    background-color: white;
+    padding: 1rem; /* Reducido para hacerlo más compacto */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px; /* Tamaño más pequeño para el formulario */
+    box-sizing: border-box;
+    margin-top: 10px; /* Espacio superior reducido */
+    margin-bottom: 10px; /* Espacio inferior reducido */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reducir el espacio entre los campos */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Reducir el espacio entre los campos */
+    align-items: center; /* Centra los campos */
+}
+
+/* Estilo de las etiquetas */
+label {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 2px; /* Reducir aún más el margen inferior */
+    color: #333;
+    width: 100%;
+    font-size: 0.9rem; /* Reducir tamaño de fuente de las etiquetas */
+}
+
+/* Estilo de los campos de texto */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    padding: 6px; /* Reducido padding para campos más pequeños */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Reducir el tamaño de la fuente en los campos */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+    border-color: #f4a1c4; /* Color de borde en focus */
+    outline: none;
+}
+
+/* Estilo del botón (solo el de registrarse) */
+button {
+    background-color: #f4a1c4;
+    color: white;
+    padding: 8px 16px; /* Reducido padding para botón más pequeño */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 0.9rem; /* Reducir tamaño de fuente del botón */
+}
+
+button:hover {
+    background-color: #d07b96; /* Rosa más oscuro para hover */
+}
+
+/* Enlace */
+a {
+    color: #f4a1c4;
+    font-size: 0.9rem; /* Reducir tamaño de fuente del enlace */
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+a:hover {
+    color: #d07b96;
+}
+
+/* Contenedor de los enlaces */
+.form-links {
+    display: flex;
+    justify-content: space-between; /* Hace que los enlaces estén a la par */
+    gap: 10px; /* Espacio entre los enlaces */
+    width: 100%; /* Asegura que ocupen el 100% del ancho */
+    text-align: center; /* Centra el texto */
+    margin-top: 10px; /* Margen superior */
+}
+
+/* Enlace de "Inicia sesión" */
+.form-links a {
+    color: #f4a1c4;
+    font-size: 0.9rem;
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+.form-links a:hover {
+    color: #d07b96;
+}
+
+/* Media queries para adaptarse a pantallas más pequeñas */
+@media screen and (max-width: 480px) {
+    .register-container {
+        max-width: 280px; /* Hacer el formulario más pequeño en móviles */
+        padding: 0.75rem; /* Ajustar el padding */
+        gap: 0.25rem;
+    }
+
+    label, input, button {
+        font-size: 0.85rem; /* Reducir el tamaño de la fuente en dispositivos pequeños */
+    }
+
+    button {
+        width: 90%; /* Reducir ligeramente el tamaño del botón */
+    }
+}
+
+/* Media queries para pantallas de tabletas */
+@media screen and (max-width: 768px) {
+    .register-container {
+        max-width: 350px; /* Un tamaño más grande para tabletas */
+        padding: 1rem;
+    }
+
+    label, input, button {
+        font-size: 0.9rem; /* Mantener el tamaño de fuente adecuado para tabletas */
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media screen and (max-width: 320px) {
+    .register-container {
+        max-width: 260px; /* Ajuste para pantallas muy pequeñas */
+        padding: 0.5rem;
+    }
+}
