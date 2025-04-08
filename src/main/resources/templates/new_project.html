@@ -1,21 +1,32 @@
-<!-- crear-proyecto.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Crear Proyecto</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
 <body>
-<h1>Crear un Nuevo Proyecto</h1>
-<form th:action="@{/dashboard/new_project}" th:object="${project}" method="post">
-    <label for="title">Título</label>
-    <input type="text" id="title" th:field="*{title}" required />
 
-    <label for="description">Descripción</label>
-    <textarea id="description" th:field="*{description}" required></textarea>
+<h1 style="color:white; text-align:center;">Crear un Nuevo Proyecto</h1>
 
-    <button type="submit">Crear Proyecto</button>
-</form>
-<br>
-<a href="/dashboard">Volver al Dashboard</a>
+<div class="container-form">
+    <form th:action="@{/dashboard/new_project}" th:object="${project}" method="post">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+        </div>
+
+        <button type="submit">Crear Proyecto</button>
+    </form>
+
+    <a href="/dashboard">← Volver al Dashboard</a>
+</div>
+
+
 </body>
 </html>
+

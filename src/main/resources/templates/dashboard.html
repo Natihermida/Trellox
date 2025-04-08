@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+
 </head>
 <body>
 <h1>Bienvenido, <span th:text="${user}"></span></h1>
@@ -19,21 +21,24 @@
     <button onclick="window.location.href='/dashboard/new_project'">Nuevo Proyecto</button>
 </div>
 
-<!-- Separador entre las secciones -->
-<hr>
 
 <!-- Área de colaboradores -->
 <div>
     <h2>Colaboradores</h2>
     <ul>
         <li th:each="collaborator : ${collaborators}">
-            <span th:text="${collaborator.first_name} + ' ' + ${collaborator.last_name}"></span>
+            <a th:href="@{/collaborator/{id}(id=${collaborator.id})}"
+               th:text="${collaborator.first_name + ' ' + collaborator.last_name}"></a>
         </li>
     </ul>
-    <button onclick="window.location.href='/dashboard/invite_collaborator'">Invitar Colaborador</button>
 </div>
+
+<form th:action="@{/logout}" method="post" class="logout-form">
+
+<button type="submit" class="cerrar-sesion">Cerrar sesión</button>
+</form>
+
 
 </body>
 </html>
-
 

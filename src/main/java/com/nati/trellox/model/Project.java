@@ -57,5 +57,17 @@ public class Project {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private java.util.List<Task> tasks = new java.util.ArrayList<>();
+
+    public java.util.List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(java.util.List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 }
 

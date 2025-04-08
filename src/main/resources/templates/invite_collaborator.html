@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Invitar Colaborador</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+
+<div class="container-form">
+    <h1>Invitar Colaborador</h1>
+    <form th:action="@{/dashboard/invite_collaborator}" method="post" th:object="${colaborador}">
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" required>
+
+        <label for="first_name">Nombre</label>
+        <input type="text" id="first_name" th:field="*{first_name}" required>
+
+        <label for="last_name">Apellidos</label>
+        <input type="text" id="last_name" th:field="*{last_name}" required>
+
+        <button type="submit">Invitar</button>
+    </form>
+    <a href="/dashboard">← Volver al Dashboard</a>
+</div>
+
+</body>
+</html>

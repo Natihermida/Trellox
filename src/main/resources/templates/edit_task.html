@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Tarea</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+<div class="container-form">
+    <h1>Editar Tarea</h1>
+
+    <form th:action="@{/dashboard/task/edit/{id}(id=${task.id})}" method="post" th:object="${task}">
+        <div>
+            <label for="title">Título</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+
+        <div>
+            <label for="description">Descripción</label>
+            <textarea id="description" th:field="*{description}" rows="4" required></textarea>
+        </div>
+
+        <div>
+            <label for="duedate">Fecha de Vencimiento</label>
+            <input type="date" id="duedate" th:field="*{duedate}" required>
+        </div>
+
+        <div>
+            <label for="status">Estado</label>
+            <select id="status" th:field="*{status}">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Completada">Completada</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="user">Asignar a Colaborador</label>
+            <select id="user" th:field="*{user}" required>
+                <option th:each="colaborador : ${colaboradores}"
+                        th:value="${colaborador.id}"
+                        th:text="${colaborador.first_name + ' ' + colaborador.last_name}">
+                </option>
+            </select>
+        </div>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <a href="/dashboard" class="volver">← Volver al Dashboard</a>
+</div>
+</body>
+</html>

@@ -66,4 +66,8 @@ public class UserService implements UserDetailsService {
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public List<User> findByRole(String roleColaborator) {
+        return userRepository.findByRole(roleColaborator);
+    }
 }

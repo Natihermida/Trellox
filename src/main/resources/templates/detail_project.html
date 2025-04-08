@@ -1,40 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del Proyecto</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Vincula tu archivo de estilos -->
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
 
 <body>
-<div class="container">
+<div class="container-form">
+    <!-- Título del proyecto -->
     <header>
-        <h1>Detalles del Proyecto</h1>
+        <h1 th:text="${project.title}">Título del Proyecto</h1>
+        <p><strong>Descripción:</strong> <span th:text="${project.description}">Descripción del proyecto</span></p>
     </header>
 
-    <!-- Detalles del Proyecto -->
-    <section class="project-details">
-        <h2>{{ project.name }}</h2>
-        <p><strong>Descripción:</strong> {{ project.description }}</p>
-        <p><strong>Fecha de Inicio:</strong> {{ project.startDate }}</p>
-        <p><strong>Fecha de Fin:</strong> {{ project.endDate }}</p>
-        <p><strong>Estado:</strong> {{ project.status }}</p>
-    </section>
+    <!-- Botones de acción -->
+    <div class="project-actions">
+        <form th:action="@{/dashboard/edit_project/{id}(id=${project.id})}" method="get" style="margin: 0;">
+            <button type="submit" class="btn-proyecto">Editar Proyecto</button>
+        </form>
+
+        <form th:action="@{/dashboard/delete_project/{id}(id=${project.id})}" method="post" style="margin: 0;">
+            <button type="submit" class="btn-proyecto" onclick="return confirm('¿Seguro que quieres eliminar este proyecto?')">
+                Eliminar Proyecto
+            </button>
+        </form>
+    </div>
 
     <!-- Formulario para crear nuevas tareas -->
     <section class="new-task">
         <h3>Crear Nueva Tarea</h3>
-        <form action="/dashboard/project/{{ project.id }}/task" method="POST">
-            <label for="taskName">Nombre de la Tarea</label>
-            <input type="text" id="taskName" name="taskName" required>
+        <form th:action="@{/dashboard/project/{id}/task(id=${project.id})}" method="post" th:object="${task}">
+            <input type="hidden" th:if="*{id != null}" th:field="*{id}" />
 
-            <label for="taskDescription">Descripción</label>
-            <textarea id="taskDescription" name="taskDescription" rows="4" required></textarea>
+            <label for="title">Nombre de la Tarea</label>
+            <input type="text" id="title" th:field="*{title}" required>
 
-            <label for="taskDueDate">Fecha de Vencimiento</label>
-            <input type="date" id="taskDueDate" name="taskDueDate" required>
+            <label for="description">Descripción</label>
+            <textarea id="description" th:field="*{description}" rows="4" required></textarea>
+
+            <label for="duedate">Fecha de Vencimiento</label>
+            <input type="date" id="duedate" th:field="*{duedate}" required>
+
+            <label for="colaborators">Colaboradores</label>
+            <select id="colaborators" name="user_id" required>
+                <option th:each="colaborador : ${colaborators}"
+                        th:value="${colaborador.id}"
+                        th:text="${colaborador.first_name + ' ' + colaborador.last_name}"></option>
+            </select>
 
             <button type="submit">Crear Tarea</button>
         </form>
@@ -44,17 +59,29 @@
     <section class="tasks-list">
         <h3>Tareas del Proyecto</h3>
         <ul>
-            <!-- Itera sobre las tareas y muéstralas -->
             <li th:each="task : ${project.tasks}">
-                <h4>{{ task.name }}</h4>
-                <p><strong>Descripción:</strong> {{ task.description }}</p>
-                <p><strong>Fecha de Vencimiento:</strong> {{ task.dueDate }}</p>
-                <p><strong>Estado:</strong> {{ task.status }}</p>
-                <!-- Agregar más detalles o botones según sea necesario -->
+                <h4 th:text="${task.title}"></h4>
+                <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
+                <p><strong>Fecha de Vencimiento:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
+                <p><strong>Estado:</strong> <span th:text="${task.status}"></span></p>
+
+                <!-- Botón Editar -->
+                <form th:action="@{/dashboard/task/edit/{id}(id=${task.id})}" method="get" style="display:inline">
+                    <button type="submit">Editar</button>
+                </form>
+
+                <!-- Botón Eliminar -->
+                <form th:action="@{/dashboard/task/delete/{id}(id=${task.id})}" method="post" style="display:inline">
+                    <button type="submit" onclick="return confirm('¿Seguro que quieres eliminar esta tarea?')">Eliminar</button>
+                </form>
+
+                <hr>
             </li>
         </ul>
     </section>
+
+    <!-- Volver -->
+    <a href="/dashboard" class="volver">← Volver al Dashboard</a>
 </div>
 </body>
-
 </html>
