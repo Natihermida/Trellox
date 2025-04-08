@@ -11,6 +11,9 @@ body {
     padding: 0;
     overflow: hidden; /* Eliminar cualquier scroll innecesario */
 }
+h1,h2{
+    color:black;
+}
 
 /* Contenedor principal del formulario */
 .login-container {

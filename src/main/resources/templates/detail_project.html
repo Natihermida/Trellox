@@ -16,17 +16,12 @@
         <p><strong>Descripción:</strong> <span th:text="${project.description}">Descripción del proyecto</span></p>
     </header>
 
-    <!-- Botones de acción -->
+    <!-- Enlaces de acción del proyecto -->
     <div class="project-actions">
-        <form th:action="@{/dashboard/edit_project/{id}(id=${project.id})}" method="get" style="margin: 0;">
-            <button type="submit" class="btn-proyecto">Editar Proyecto</button>
-        </form>
-
-        <form th:action="@{/dashboard/delete_project/{id}(id=${project.id})}" method="post" style="margin: 0;">
-            <button type="submit" class="btn-proyecto" onclick="return confirm('¿Seguro que quieres eliminar este proyecto?')">
-                Eliminar Proyecto
-            </button>
-        </form>
+        <a th:href="@{/dashboard/edit_project/{id}(id=${project.id})}" class="enlace-accion">✏️ Editar Proyecto</a>
+        <a th:href="@{/dashboard/delete_project/{id}(id=${project.id})}"
+           th:onclick="|return confirm('¿Seguro que quieres eliminar este proyecto?')|"
+           class="enlace-accion eliminar">🗑️ Eliminar Proyecto</a>
     </div>
 
     <!-- Formulario para crear nuevas tareas -->

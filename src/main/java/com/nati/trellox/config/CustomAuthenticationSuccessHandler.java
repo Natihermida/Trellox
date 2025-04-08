@@ -28,7 +28,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 redirectUrl = "/dashboard";
                 break;
             } else if (authority.getAuthority().equals("ROLE_COLABORATOR")) {
-                redirectUrl = "/colaborator";
+                redirectUrl = "/collaborator";
                 break;
             }
         }

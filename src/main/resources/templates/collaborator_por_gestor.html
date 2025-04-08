@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tareas de [[${colaborador.first_name}]]</title>
+    <link rel="stylesheet" th:href="@{/css/collaborator.css}">
+</head>
+<body>
+<div class="container-form">
+    <h1>Tareas de <span th:text="${colaborador.first_name + ' ' + colaborador.last_name}"></span></h1>
+
+    <div class="task-columns">
+        <!-- Tareas Pendientes -->
+        <div class="task-column">
+            <h2>Tareas Pendientes</h2>
+            <ul>
+                <li th:each="task : ${tareasPendientes}">
+                    <h3 th:text="${task.title}"></h3>
+                    <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
+                    <p><strong>Vence:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
+
+                    <div class="comments">
+                        <h4>Comentarios</h4>
+                        <ul>
+                            <li th:each="comment : ${task.comments}">
+                                <p>
+                                    <strong th:text="${comment.author.first_name + ': '}"></strong>
+                                    <span th:text="${comment.content}"></span>
+                                </p>
+                                <p class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tareas Completadas -->
+        <div class="task-column">
+            <h2>Tareas Completadas</h2>
+            <ul>
+                <li th:each="task : ${tareasCompletadas}">
+                    <h3 th:text="${task.title}"></h3>
+                    <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
+                    <p><strong>Vence:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
+
+                    <div class="comments">
+                        <h4>Comentarios</h4>
+                        <ul>
+                            <li th:each="comment : ${task.comments}">
+                                <p>
+                                    <strong th:text="${comment.author.first_name + ': '}"></strong>
+                                    <span th:text="${comment.content}"></span>
+                                </p>
+                                <p class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="logout-form">
+        <a href="/dashboard" class="cerrar-sesion">← Volver al Dashboard</a>
+    </div>
+</div>
+</body>
+</html>

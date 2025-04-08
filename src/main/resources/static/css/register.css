@@ -11,7 +11,9 @@ body {
     padding: 0;
     overflow: hidden; /* Eliminar cualquier scroll innecesario */
 }
-
+h2{
+    color:black;
+}
 /* Contenedor principal del formulario */
 .register-container {
     text-align: center;

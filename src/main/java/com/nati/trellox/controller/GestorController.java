@@ -11,14 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -28,9 +26,12 @@ public class GestorController {
     private final ProjectService projectService;
     private final UserService userService;
 
-    public GestorController(ProjectService projectService, UserService userService) {
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    public GestorController(ProjectService projectService, UserService userService,PasswordEncoder passwordEncoder) {
         this.projectService = projectService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     // Método privado para obtener el usuario autenticado
@@ -180,10 +181,32 @@ public class GestorController {
     }
     @PostMapping("/invite_collaborator")
     public String procesarInvitacion(@ModelAttribute("colaborador") User colaborador) {
-        colaborador.setPassword(""); // sin contraseña aún
+        colaborador.setPassword(passwordEncoder.encode("1234"));
         colaborador.setRole("ROLE_COLABORATOR");
         userService.createUser(colaborador);
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/collaborator/{id}")
+    public String verTareasDeColaborador(@PathVariable Long id, Model model) {
+        User colaborador = userService.getUserById(id)
+                .orElseThrow(() -> new RuntimeException("Colaborador no encontrado"));
+
+        List<Task> tareas = taskService.findByUserId(colaborador.getId());
+
+        List<Task> tareasPendientes = tareas.stream()
+                .filter(t -> !"Completada".equalsIgnoreCase(t.getStatus()))
+                .toList();
+
+        List<Task> tareasCompletadas = tareas.stream()
+                .filter(t -> "Completada".equalsIgnoreCase(t.getStatus()))
+                .toList();
+
+        model.addAttribute("colaborador", colaborador);
+        model.addAttribute("tareasPendientes", tareasPendientes);
+        model.addAttribute("tareasCompletadas", tareasCompletadas);
+
+        return "collaborator_por_gestor"; // Nombre de la nueva vista
     }
 
 

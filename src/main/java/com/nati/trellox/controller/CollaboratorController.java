@@ -69,18 +69,7 @@ public class CollaboratorController {
         taskService.save(task);
         return "redirect:/collaborator";
     }
-    @GetMapping("/collaborator/{id}")
-    public String viewCollaboratorTasks(@PathVariable Long id, Model model) {
-        User user = userService.getUserById(id)
-                .orElseThrow(() -> new RuntimeException("Colaborador no encontrado"));
 
-        List<Task> tareasAsignadas = taskService.findByUserId(user.getId());
-
-        model.addAttribute("user", user);
-        model.addAttribute("tasks", tareasAsignadas);
-
-        return "collaborator"; // Carga la vista con las tareas del colaborador
-    }
 
     @PostMapping("/comment/edit")
     public String editarComentario(@RequestParam Long commentId,

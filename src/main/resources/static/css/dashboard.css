@@ -220,6 +220,34 @@ textarea {
         font-size: 0.95rem;
     }
 }
+.project-actions {
+    display: flex;
+    justify-content: center; /* <-- Esto centra horizontalmente */
+    gap: 1rem; /* Espacio entre los enlaces */
+    margin: 1rem 0;
+}
+
+.enlace-accion {
+    font-weight: bold;
+    color: #f4a1c4;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.enlace-accion:hover {
+    color: #d07b96;
+    text-decoration: underline;
+}
+
+.enlace-accion.eliminar {
+    color: #d07b96;
+}
+
+.enlace-accion.eliminar:hover {
+    color: #d07b96;
+}
+
 
 /* ===== Media Queries: Móviles ===== */
 @media screen and (max-width: 480px) {
@@ -250,4 +278,5 @@ textarea {
     textarea {
         font-size: 0.9rem;
     }
+
 }

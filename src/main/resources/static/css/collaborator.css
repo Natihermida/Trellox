@@ -1,0 +1,100 @@
+body {
+    background-color: #f4a1c4;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.container-form {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.task-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.task-column {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.task-column h2 {
+    text-align: center;
+    color: #f4a1c4;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #ffe6f0;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+button {
+    background-color: #f4a1c4;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d07b96;
+}
+
+textarea {
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.logout-form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.cerrar-sesion {
+    background-color: white;
+    color: #f4a1c4;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cerrar-sesion:hover {
+    background-color: #f4a1c4;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .task-columns {
+        flex-direction: column;
+    }
+}

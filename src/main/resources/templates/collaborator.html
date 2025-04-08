@@ -3,73 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel del Colaborador</title>
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/collaborator.css}">
 </head>
 <body>
 <div class="container-form">
     <header>
         <h1>
-            Bienvenido,
-            <span th:text="${user.first_name + ' ' + user.last_name}"></span>
+            Bienvenido, <span th:text="${user.first_name + ' ' + user.last_name}"></span>
         </h1>
-        <h2>Tareas Asignadas</h2>
     </header>
 
-    <section class="tasks-list">
-        <ul>
-            <li th:each="task : ${tasks}">
-                <h3 th:text="${task.title}"></h3>
-                <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
-                <p><strong>Fecha de Vencimiento:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
-                <p><strong>Estado:</strong> <span th:text="${task.status}"></span></p>
+    <div class="task-columns">
+        <!-- Tareas Pendientes -->
+        <div class="task-column">
+            <h2>Tareas Pendientes</h2>
+            <ul>
+                <li th:each="task : ${tasks}" th:if="${task.status != 'Completada'}">
+                    <h3 th:text="${task.title}"></h3>
+                    <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
+                    <p><strong>Vence:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
 
-                <!-- Comentarios -->
-                <div class="comments">
-                    <h4>Comentarios</h4>
-                    <ul>
-                        <li th:each="comment : ${task.comments}">
-                            <p>
-                                <strong th:text="${comment.author.first_name + ': '}"></strong>
-                                <span th:text="${comment.content}"></span>
-                            </p>
-                            <p class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                    <!-- Comentarios -->
+                    <div class="comments">
+                        <h4>Comentarios</h4>
+                        <ul>
+                            <li th:each="comment : ${task.comments}">
+                                <p><strong th:text="${comment.author.first_name + ': '}"></strong>
+                                    <span th:text="${comment.content}"></span></p>
+                                <p class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
 
-                            <!-- Mostrar solo si el comentario es del usuario autenticado -->
-                            <div th:if="${comment.author.id == user.id}">
-                                <!-- Editar -->
-                                <form th:action="@{/comment/edit}" method="post" style="display:inline;">
-                                    <input type="hidden" name="commentId" th:value="${comment.id}" />
-                                    <input type="text" name="newContent" th:placeholder="${comment.content}" required />
-                                    <button type="submit">Editar</button>
-                                </form>
+                                <div th:if="${comment.author.id == user.id}">
+                                    <form th:action="@{/comment/edit}" method="post">
+                                        <input type="hidden" name="commentId" th:value="${comment.id}" />
+                                        <input type="text" name="newContent" placeholder="Editar comentario..." required />
+                                        <button type="submit">Guardar</button>
+                                    </form>
 
-                                <!-- Eliminar -->
-                                <form th:action="@{/comment/delete}" method="post" style="display:inline;">
-                                    <input type="hidden" name="commentId" th:value="${comment.id}" />
-                                    <button type="submit" onclick="return confirm('¿Eliminar este comentario?')">Eliminar</button>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                                    <form th:action="@{/comment/delete}" method="post">
+                                        <input type="hidden" name="commentId" th:value="${comment.id}" />
+                                        <button type="submit">🗑</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- Añadir nuevo comentario -->
-                <form th:action="@{/task/{taskId}/comment(taskId=${task.id})}" method="post">
-                    <textarea name="content" placeholder="Escribe un comentario..." required></textarea>
-                    <button type="submit">Añadir Comentario</button>
-                </form>
+                    <form th:action="@{/task/{taskId}/comment(taskId=${task.id})}" method="post">
+                        <textarea name="content" placeholder="Escribe un comentario..." required></textarea>
+                        <button type="submit">Añadir Comentario</button>
+                    </form>
 
-                <hr>
-            </li>
-        </ul>
-    </section>
+                    <form th:action="@{/task/{id}/status(id=${task.id})}" method="post">
+                        <button type="submit">✔ Marcar como Completada</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
 
-    <a href="/dashboard" class="volver"
-       th:if="${#authorization.expression('hasRole(''ROLE_GESTOR'')')}">← Volver al Dashboard</a>
+        <!-- Tareas Completadas -->
+        <div class="task-column">
+            <h2>Tareas Completadas</h2>
+            <ul>
+                <li th:each="task : ${tasks}" th:if="${task.status == 'Completada'}">
+                    <h3 th:text="${task.title}"></h3>
+                    <p><strong>Descripción:</strong> <span th:text="${task.description}"></span></p>
+                    <p><strong>Vence:</strong> <span th:text="${#dates.format(task.duedate, 'dd/MM/yyyy')}"></span></p>
 
-    <form th:action="@{/logout}" method="post" class="logout-form">
-        <button type="submit" class="cerrar-sesion">Cerrar sesión</button>
-    </form>
+                    <div class="comments">
+                        <h4>Comentarios</h4>
+                        <ul>
+                            <li th:each="comment : ${task.comments}">
+                                <p><strong th:text="${comment.author.first_name + ': '}"></strong>
+                                    <span th:text="${comment.content}"></span></p>
+                                <p class="comment-date" th:text="${#dates.format(comment.createdAt, 'dd/MM/yyyy HH:mm')}"></p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Botón cerrar sesión -->
+    <div class="logout-form">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="cerrar-sesion">Cerrar sesión</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
